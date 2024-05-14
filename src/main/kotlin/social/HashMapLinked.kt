@@ -29,23 +29,52 @@ class HashMapLinked<K, V> : OrderedMap<K, V> {
 
     override val values: List<V>
         get() {
-            TODO("To be implemented")
+            val values = mutableListOf<V>()
+            var current = head
+            while (current != null) {
+                values.add(current.value)
+                current = current.next
+            }
+            return values
         }
 
-    override fun containsKey(key: K): Boolean {
-        TODO("To be implemented")
-    }
+    override fun containsKey(key: K): Boolean = getBucket(key).any { it.key == key }
 
-    override fun remove(key: K): V? {
-        TODO("To be implemented")
-    }
+    override fun remove(key: K): V? =
+        if (containsKey(key)) {
+            val bucket = getBucket(key)
+            val currentItem = bucket.first { it.key == key }
+            bucket.remove(currentItem)
+            if (head == currentItem) head = currentItem.next
+            if (tail == currentItem) tail = currentItem.prev
+            currentItem.prev?.next = currentItem.next
+            currentItem.next?.prev = currentItem.prev
+            size--
+
+            currentItem.value
+        } else
+            null
 
     override fun set(key: K, value: V): V? {
-        TODO("To be implemented")
+        val previousValue = remove(key)
+        val newNode = Node(key, value, tail)
+        getBucket(key).add(newNode)
+        if (head == null) head = newNode
+        tail?.next = newNode
+        tail = newNode
+        size++
+        resize()
+
+        return previousValue
     }
 
     override fun removeLongestStandingEntry(): Pair<K, V>? {
-        TODO("To be implemented")
+        if (head != null) {
+            val key = head!!.key
+            val removed = remove(key)
+            return Pair(key, removed!!)
+        }
+        return null
     }
 
     private fun getBucket(key: K) = buckets[key.hashCode().mod(buckets.size)]

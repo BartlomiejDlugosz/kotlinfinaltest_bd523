@@ -1,6 +1,5 @@
 package social
 
-/*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -196,4 +195,3 @@ class Question5Tests {
         assertEquals((1..<numElements step 2).toList(), map.values)
     }
 }
-*/

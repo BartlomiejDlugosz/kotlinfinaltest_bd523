@@ -5,7 +5,7 @@ interface OrderedMap<K, V> {
 
     val size: Int
 
-    fun set(key: K, value: V): V?
+    operator fun set(key: K, value: V): V?
 
     fun containsKey(key: K): Boolean
 

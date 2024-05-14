@@ -1,6 +1,5 @@
 package social
 
-/*
 import java.util.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -73,4 +72,3 @@ class Question7Tests {
 }
 
 private fun bornInSameYear(first: User, second: User): Boolean = first.yearOfBirth == second.yearOfBirth
-*/

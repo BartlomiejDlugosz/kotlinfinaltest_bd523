@@ -1,6 +1,5 @@
 package social
 
-/*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -140,4 +139,3 @@ class Question3Tests {
         bio = "I got my first real six string.",
     )
 }
-*/
